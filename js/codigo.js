@@ -20,6 +20,7 @@ const sectionLog = document.getElementById("resultado");
 const ataqueDelJugador = document.getElementById("ataqueDelJugador");
 const ataquesEnemigo = document.getElementById("ataquesEnemigo");
 
+let mokepones = [];
 let ataqueJugador;
 let ataqueEnemigoAleatorio;
 let triunfos = 3;
@@ -36,6 +37,8 @@ class Mokepon{
 let hipodoge = new Mokepon("Hipodoge", "./assets/img/mokepons_mokepon_hipodoge_attack.png", 5);
 let capipepo = new Mokepon("Capipepo", "./assets/img/mokepons_mokepon_capipepo_attack.png", 5);
 let ratigueya = new Mokepon("Ratigueya", "./assets/img/mokepons_mokepon_ratigueya_attack.png", 5);
+
+mokepones.push(hipodoge,capipepo,ratigueya);
 
 function iniciarJuego() {
     seccionAtaque.style.display = "none";
