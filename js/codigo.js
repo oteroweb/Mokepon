@@ -24,6 +24,19 @@ let ataqueJugador;
 let ataqueEnemigoAleatorio;
 let triunfos = 3;
 let perdidas = 3;
+
+class Mokepon{
+    constructor(nombre, foto, vida, ){
+        this.nombre = nombre;
+        this.foto = foto;
+        this.vida = vida;
+    }
+}
+
+let hipodoge = new Mokepon("Hipodoge", "./assets/img/mokepons_mokepon_hipodoge_attack.png", 5);
+let capipepo = new Mokepon("Capipepo", "./assets/img/mokepons_mokepon_capipepo_attack.png", 5);
+let ratigueya = new Mokepon("Ratigueya", "./assets/img/mokepons_mokepon_ratigueya_attack.png", 5);
+
 function iniciarJuego() {
     seccionAtaque.style.display = "none";
     //DECLARACION BOTONES MASCOTAS
