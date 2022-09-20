@@ -21,7 +21,8 @@ const contenedorAtaques = document.getElementById("contenedorAtaques")
 
 let mokepones = [];
 let ataqueJugador = [];
-let ataqueEnemigoAleatorio;
+let ataqueEnemigoAleatorio = [];
+let ataquesMokeponEnemigo;
 let opcionDeMokepones;
 let opcionDeAtaque;
 let inpHipodogue;
@@ -152,6 +153,7 @@ function secuenciaDeAtaque() {
                 console.log(ataqueJugador);
                 boton.style.background = "#112f58"
             }
+            ataqueEnemigo();
         })
     })
 }
@@ -162,15 +164,15 @@ function seleccionMascotaEnemigo(min, max) {
     secuenciaDeAtaque();
 }
 function ataqueEnemigo() {
-    let ataqueAleatorio = aleatrorio(1, 3);
-    if (ataqueAleatorio == 1) {
-        ataqueEnemigoAleatorio = "Fuego";
+    let ataqueAleatorio = aleatrorio(0, mokepones.length - 1);
+    if (ataqueAleatorio == 0 || ataqueAleatorio == 1) {
+        ataqueEnemigoAleatorio.push("Fuego");
         combate();
-    } else if (ataqueAleatorio == 2) {
-        ataqueEnemigoAleatorio = "Agua";
+    } else if (ataqueAleatorio == 2 || ataqueAleatorio == 4 ) {
+        ataqueEnemigoAleatorio.push("Agua");
         combate();
-    } else if (ataqueAleatorio == 3) {
-        ataqueEnemigoAleatorio = "Tierra";
+    } else {
+        ataqueEnemigoAleatorio.push("Tierra");
         combate();
     }
 
