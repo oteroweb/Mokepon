@@ -1,8 +1,6 @@
 const seccionAtaque = document.getElementById("seleccionarAtaque");
 const btnMascotaJugador = document.getElementById("btnMascota");
-const btnTierra = document.getElementById("btnTierra");
-const btnFuego = document.getElementById("btnFuego");
-const btnAgua = document.getElementById("btnAgua");
+
 const btnReiniciar = document.getElementById("btnReiniciar");
 
 const seccionMascotas = document.getElementById("seleccionMascota");
@@ -18,15 +16,20 @@ const sectionLog = document.getElementById("resultado");
 const ataqueDelJugador = document.getElementById("ataqueDelJugador");
 const ataquesEnemigo = document.getElementById("ataquesEnemigo");
 
-const contenedorTarjetas = document.getElementById("contenedorTarjetas")
+const contenedorTarjetas = document.getElementById("contenedorTarjetas");
+const contenedorAtaques = document.getElementById("contenedorAtaques")
 
 let mokepones = [];
 let ataqueJugador;
 let ataqueEnemigoAleatorio;
 let opcionDeMokepones;
+let opcionDeAtaque;
 let inpHipodogue;
 let inpCapipepo;
 let inpRatigueya;
+let btnTierra;
+let btnFuego;
+let btnAgua;
 let mascotaJugador;
 let triunfos = 3;
 let perdidas = 3;
@@ -84,12 +87,10 @@ function iniciarJuego() {
         inpCapipepo = document.getElementById("btnCapipepo");
         inpRatigueya = document.getElementById("btnRatigueya");
     });
-    
+
     //DECLARACION BOTONES MASCOTAS
     btnMascotaJugador.addEventListener("click", seleccionMascotaJugador);
-    btnFuego.addEventListener("click", ataqueFuego);
-    btnAgua.addEventListener("click", ataqueAgua);
-    btnTierra.addEventListener("click", ataqueTierra);
+
     btnReiniciar.addEventListener("click", reiniciar);
     btnReiniciar.style.display = "none";
 }
@@ -111,15 +112,29 @@ function seleccionMascotaJugador() {
     extraerAtaques(mascotaJugador);
     seleccionMascotaEnemigo(0, mokepones.length - 1);
 }
-function extraerAtaques(mascotaJugador){
+function extraerAtaques(mascotaJugador) {
     let ataques;
     for (let i = 0; i < mokepones.length; i++) {
-        if(mascotaJugador === mokepones[i].nombre){
+        if (mascotaJugador === mokepones[i].nombre) {
             ataques = mokepones[i].ataques;
         }
-        
+
     }
     mostrarAtaques(ataques);
+}
+
+function mostrarAtaques(ataques) {
+    ataques.forEach((ataque) => {
+        opcionDeAtaque = `<button id=${ataque.id} class="btnAtaques">${ataque.nombre}</button>`
+        contenedorAtaques.innerHTML += opcionDeAtaque;
+    })
+    btnTierra = document.getElementById("btnTierra");
+    btnFuego = document.getElementById("btnFuego");
+    btnAgua = document.getElementById("btnAgua");
+
+    btnFuego.addEventListener("click", ataqueFuego);
+    btnAgua.addEventListener("click", ataqueAgua);
+    btnTierra.addEventListener("click", ataqueTierra);
 }
 
 function seleccionMascotaEnemigo(min, max) {
