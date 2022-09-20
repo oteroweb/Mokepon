@@ -107,17 +107,11 @@ function seleccionMascotaJugador() {
     } else {
         alert("Selecciona una mascota!");
     }
-    seleccionMascotaEnemigo(1, 3);
+    seleccionMascotaEnemigo(0, mokepones.length - 1);
 }
 function seleccionMascotaEnemigo(min, max) {
     let mascotaEnemigo = aleatrorio(min, max);
-    if (mascotaEnemigo == 1) {
-        spanMascotaEnemigo.innerHTML = "Hipodoge";
-    } else if (mascotaEnemigo == 2) {
-        spanMascotaEnemigo.innerHTML = "Capipepo";
-    } else if (mascotaEnemigo == 3) {
-        spanMascotaEnemigo.innerHTML = "Ratigueya";
-    }
+    spanMascotaEnemigo.innerHTML = mokepones[mascotaEnemigo].nombre;
 }
 function ataqueEnemigo() {
     let ataqueAleatorio = aleatrorio(1, 3);
