@@ -26,11 +26,12 @@ let ataqueEnemigoAleatorio;
 let triunfos = 3;
 let perdidas = 3;
 
-class Mokepon{
-    constructor(nombre, foto, vida, ){
+class Mokepon {
+    constructor(nombre, foto, vida,) {
         this.nombre = nombre;
         this.foto = foto;
         this.vida = vida;
+        this.ataques = [];
     }
 }
 
@@ -38,7 +39,30 @@ let hipodoge = new Mokepon("Hipodoge", "./assets/img/mokepons_mokepon_hipodoge_a
 let capipepo = new Mokepon("Capipepo", "./assets/img/mokepons_mokepon_capipepo_attack.png", 5);
 let ratigueya = new Mokepon("Ratigueya", "./assets/img/mokepons_mokepon_ratigueya_attack.png", 5);
 
-mokepones.push(hipodoge,capipepo,ratigueya);
+mokepones.push(hipodoge, capipepo, ratigueya);
+
+hipodoge.ataques.push(
+    { nombre: "💦", id: "btnAgua" },
+    { nombre: "💦", id: "btnAgua" },
+    { nombre: "💦", id: "btnAgua" },
+    { nombre: "🌱", id: "btnTierra" },
+    { nombre: "🔥", id: "btnFuego" },
+);
+capipepo.ataques.push(
+    { nombre: "🌱", id: "btnTierra" },
+    { nombre: "🌱", id: "btnTierra" },
+    { nombre: "🌱", id: "btnTierra" },
+    { nombre: "💦", id: "btnAgua" },
+    { nombre: "🔥", id: "btnFuego" },
+);
+ratigueya.ataques.push(
+    { nombre: "🔥", id: "btnFuego" },
+    { nombre: "🔥", id: "btnFuego" },
+    { nombre: "🔥", id: "btnFuego" },
+    { nombre: "💦", id: "btnAgua" },
+    { nombre: "🌱", id: "btnTierra" },
+);
+console.log(hipodoge)
 
 function iniciarJuego() {
     seccionAtaque.style.display = "none";
@@ -51,11 +75,8 @@ function iniciarJuego() {
     btnReiniciar.style.display = "none";
 }
 function seleccionMascotaJugador() {
-
     seccionAtaque.style.display = "flex";
-
     seccionMascotas.style.display = "none";
-
     let mascota = " ";
     if (inpHipodogue.checked) {
         mascota = "Hipodoge";
@@ -71,7 +92,7 @@ function seleccionMascotaJugador() {
     }
     seleccionMascotaEnemigo(1, 3);
 }
-function seleccionMascotaEnemigo(min, max) { 
+function seleccionMascotaEnemigo(min, max) {
     let mascotaEnemigo = aleatrorio(min, max);
     if (mascotaEnemigo == 1) {
         spanMascotaEnemigo.innerHTML = "Hipodoge";
@@ -117,7 +138,7 @@ function crearMensaje(resultado) {
     ataquesEnemigo.appendChild(nuevoAtaqueEnemigo);
 }
 function finJuego(resultado) {
-    sectionLog.innerHTML = resultado; 
+    sectionLog.innerHTML = resultado;
     btnFuego.disabled = true;
     btnAgua.disabled = true;
     btnTierra.disabled = true;
