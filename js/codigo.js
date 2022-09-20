@@ -96,14 +96,14 @@ function seleccionMascotaJugador() {
     seccionMascotas.style.display = "none";
     let mascota = " ";
     if (inpHipodogue.checked) {
-        mascota = "Hipodoge";
-        spanMascotaJugador.innerHTML = "Hipodoge";
+        mascota = inpHipodogue.value;
+        spanMascotaJugador.innerHTML = inpHipodogue.value;
     } else if (inpCapipepo.checked) {
-        mascota = "Capipepo";
-        spanMascotaJugador.innerHTML = "Capipepo";
+        mascota = inpCapipepo.value;
+        spanMascotaJugador.innerHTML = inpCapipepo.value;
     } else if (inpRatigueya.checked) {
-        mascota = "Ratigueya"
-        spanMascotaJugador.innerHTML = "Ratigueya";
+        mascota = inpRatigueya.value
+        spanMascotaJugador.innerHTML = inpRatigueya.value;
     } else {
         alert("Selecciona una mascota!");
     }
