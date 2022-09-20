@@ -20,26 +20,29 @@ const sectionLog = document.getElementById("resultado");
 const ataqueDelJugador = document.getElementById("ataqueDelJugador");
 const ataquesEnemigo = document.getElementById("ataquesEnemigo");
 
+const contenedorTarjetas = document.getElementById("contenedorTarjetas")
+
 let mokepones = [];
 let ataqueJugador;
 let ataqueEnemigoAleatorio;
+let opcionDeMokepones;
 let triunfos = 3;
 let perdidas = 3;
 
 class Mokepon {
-    constructor(nombre, foto, vida,) {
+    constructor(nombre, foto, vida,id) {
         this.nombre = nombre;
         this.foto = foto;
         this.vida = vida;
         this.ataques = [];
+        this.id = id;
     }
 }
 
-let hipodoge = new Mokepon("Hipodoge", "./assets/img/mokepons_mokepon_hipodoge_attack.png", 5);
-let capipepo = new Mokepon("Capipepo", "./assets/img/mokepons_mokepon_capipepo_attack.png", 5);
-let ratigueya = new Mokepon("Ratigueya", "./assets/img/mokepons_mokepon_ratigueya_attack.png", 5);
+let hipodoge = new Mokepon("Hipodoge", "./assets/img/mokepons_mokepon_hipodoge_attack.png", 5, "btnHipodoge");
+let capipepo = new Mokepon("Capipepo", "./assets/img/mokepons_mokepon_capipepo_attack.png", 5, "btnCapipepo");
+let ratigueya = new Mokepon("Ratigueya", "./assets/img/mokepons_mokepon_ratigueya_attack.png", 5, "btnRatigueya");
 
-mokepones.push(hipodoge, capipepo, ratigueya);
 
 hipodoge.ataques.push(
     { nombre: "💦", id: "btnAgua" },
@@ -62,10 +65,20 @@ ratigueya.ataques.push(
     { nombre: "💦", id: "btnAgua" },
     { nombre: "🌱", id: "btnTierra" },
 );
-console.log(hipodoge)
+
+mokepones.push(hipodoge, capipepo, ratigueya);
 
 function iniciarJuego() {
     seccionAtaque.style.display = "none";
+    mokepones.forEach((mokepon) => {
+        opcionDeMokepones = `
+        <input type="radio" value=${mokepon.nombre} name="mascota" id=${mokepon.id}>
+        <label class="tarjetaMokepon" for=${mokepon.id}>
+            <p>${mokepon.nombre}</p>
+            <img src=${mokepon.foto} alt=${mokepon.nombre}>
+        </label>`
+        contenedorTarjetas.innerHTML += opcionDeMokepones;
+    });
     //DECLARACION BOTONES MASCOTAS
     btnMascotaJugador.addEventListener("click", seleccionMascotaJugador);
     btnFuego.addEventListener("click", ataqueFuego);
