@@ -33,6 +33,8 @@ let btnFuego;
 let btnAgua;
 let botones = [];
 let mascotaJugador;
+let victoriasJugador = 0;
+let victoriasEnemigo = 0;
 let triunfos = 3;
 let perdidas = 3;
 let indexAtaqueEnemigo;
@@ -96,7 +98,7 @@ function iniciarJuego() {
     btnMascotaJugador.addEventListener("click", seleccionMascotaJugador);
 
     btnReiniciar.addEventListener("click", reiniciar);
-    btnReiniciar.style.display = "none";
+    /* btnReiniciar.style.display = "none"; */
 }
 function seleccionMascotaJugador() {
     seccionAtaque.style.display = "flex";
@@ -215,22 +217,25 @@ function combate() {
             indexAmbosOponentes(i,i);
             resultado = "¡Ganaste este combate 👑!";
             crearMensaje(resultado);
-            perdidas--;
-            spanVidaEnemigo.innerHTML = perdidas;
+            victoriasJugador++;
+            spanVidasJugador.innerHTML = victoriasJugador;;
+            
         }else {
             indexAmbosOponentes(i,i);
             resultado = "Perdiste:(";
             crearMensaje(resultado);
-            triunfos--;
-            spanVidasJugador.innerHTML = triunfos;
+            victoriasEnemigo++;
+            spanVidaEnemigo.innerHTML = victoriasEnemigo;
         }
     }
 }
 function revisarVidas() {
-    if (perdidas == 0) {
+    if (victoriasJugador == victoriasEnemigo) {
+        finJuego("¡Empate!");
+    } else if (victoriasJugador > victoriasEnemigo) {
         finJuego("¡Ganaste este combate!");
-    } else if (triunfos == 0) {
-        finJuego("¡Perdiste este combate!");
+    }else{
+         finJuego("¡Perdiste este combate!");
     }
 }
 function reiniciar() {
