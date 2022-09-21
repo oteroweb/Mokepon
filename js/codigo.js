@@ -28,6 +28,9 @@ let opcionDeAtaque;
 let inpHipodogue;
 let inpCapipepo;
 let inpRatigueya;
+let inpLangostelvis;
+let inpPydos;
+let inpTucapalma;
 let btnTierra;
 let btnFuego;
 let btnAgua;
@@ -35,8 +38,6 @@ let botones = [];
 let mascotaJugador;
 let victoriasJugador = 0;
 let victoriasEnemigo = 0;
-let triunfos = 3;
-let perdidas = 3;
 let indexAtaqueEnemigo;
 let indexAtaqueJugador;
 
@@ -53,6 +54,9 @@ class Mokepon {
 let hipodoge = new Mokepon("Hipodoge", "./assets/img/mokepons_mokepon_hipodoge_attack.png", 5, "btnHipodoge");
 let capipepo = new Mokepon("Capipepo", "./assets/img/mokepons_mokepon_capipepo_attack.png", 5, "btnCapipepo");
 let ratigueya = new Mokepon("Ratigueya", "./assets/img/mokepons_mokepon_ratigueya_attack.png", 5, "btnRatigueya");
+let langostelvis = new Mokepon("Langostelvis","./assets/img/mokepons_mokepon_langostelvis_attack.png",5,"btnLangostelvis");
+let pydos = new Mokepon("Pydos","./assets/img/mokepons_mokepon_pydos_attack.png",5,"btnPydos");
+let tucapalma = new Mokepon("Tucapalma","./assets/img/mokepons_mokepon_tucapalma_attack.png",5,"btnTucapalma");
 
 
 hipodoge.ataques.push(
@@ -76,8 +80,30 @@ ratigueya.ataques.push(
     { nombre: "💦", id: "btnAgua" },
     { nombre: "🌱", id: "btnTierra" },
 );
+langostelvis.ataques.push(
+    { nombre: "🔥", id: "btnFuego" },
+    { nombre: "🔥", id: "btnFuego" },
+    { nombre: "🔥", id: "btnFuego" },
+    { nombre: "💦", id: "btnAgua" },
+    { nombre: "🌱", id: "btnTierra" },
+)
+pydos.ataques.push(
+    { nombre: "🌱", id: "btnTierra" },
+    { nombre: "🌱", id: "btnTierra" },
+    { nombre: "🌱", id: "btnTierra" },
+    { nombre: "💦", id: "btnAgua" },
+    { nombre: "🔥", id: "btnFuego" },
+);
 
-mokepones.push(hipodoge, capipepo, ratigueya);
+tucapalma.ataques.push(
+    { nombre: "💦", id: "btnAgua" },
+    { nombre: "💦", id: "btnAgua" },
+    { nombre: "💦", id: "btnAgua" },
+    { nombre: "🌱", id: "btnTierra" },
+    { nombre: "🔥", id: "btnFuego" },
+);
+
+mokepones.push(hipodoge, capipepo, ratigueya, langostelvis, pydos, tucapalma);
 
 function iniciarJuego() {
     seccionAtaque.style.display = "none";
@@ -92,6 +118,9 @@ function iniciarJuego() {
         inpHipodogue = document.getElementById("btnHipodoge");
         inpCapipepo = document.getElementById("btnCapipepo");
         inpRatigueya = document.getElementById("btnRatigueya");
+        inpLangostelvis = document.getElementById("btnLangostelvis");
+        inpPydos = document.getElementById("btnPydos");
+        inpTucapalma = document.getElementById("btnTucapalma");
     });
 
     //DECLARACION BOTONES MASCOTAS
@@ -112,6 +141,15 @@ function seleccionMascotaJugador() {
     } else if (inpRatigueya.checked) {
         mascotaJugador = inpRatigueya.value
         spanMascotaJugador.innerHTML = inpRatigueya.value;
+    }else if (inpLangostelvis.checked) {
+        mascotaJugador = inpLangostelvis.value
+        spanMascotaJugador.innerHTML = inpTucapalma.value;
+    }else if (inpPydos.checked) {
+        mascotaJugador = inpPydos.value
+        spanMascotaJugador.innerHTML = inpTucapalma.value;
+    }else if (inpTucapalma.checked) {
+        mascotaJugador = inpTucapalma.value
+        spanMascotaJugador.innerHTML = inpTucapalma.value;
     } else {
         alert("Selecciona una mascota!");
     }
@@ -148,14 +186,17 @@ function secuenciaDeAtaque() {
                 ataqueJugador.push("Fuego");
                 console.log(ataqueJugador);
                 boton.style.background = "#112f58"
+                boton.disabled = true;
             } else if (e.target.textContent === "💦") {
                 ataqueJugador.push("Agua");
                 console.log(ataqueJugador);
                 boton.style.background = "#112f58"
+                boton.disabled = true;
             } else {
                 ataqueJugador.push("Tierra");
                 console.log(ataqueJugador);
                 boton.style.background = "#112f58"
+                boton.disabled = true;
             }
             ataqueEnemigo();
         })
@@ -196,9 +237,6 @@ function crearMensaje(resultado) {
 }
 function finJuego(resultado) {
     sectionLog.innerHTML = resultado;
-    btnFuego.disabled = true;
-    btnAgua.disabled = true;
-    btnTierra.disabled = true;
     btnReiniciar.style.display = "block";
 }
 
