@@ -35,6 +35,8 @@ let botones = [];
 let mascotaJugador;
 let triunfos = 3;
 let perdidas = 3;
+let indexAtaqueEnemigo;
+let indexAtaqueJugador;
 
 class Mokepon {
     constructor(nombre, foto, vida, id) {
@@ -167,22 +169,26 @@ function ataqueEnemigo() {
     let ataqueAleatorio = aleatrorio(0, mokepones.length - 1);
     if (ataqueAleatorio == 0 || ataqueAleatorio == 1) {
         ataqueEnemigoAleatorio.push("Fuego");
-        combate();
-    } else if (ataqueAleatorio == 2 || ataqueAleatorio == 4 ) {
+    } else if (ataqueAleatorio == 2 || ataqueAleatorio == 4) {
         ataqueEnemigoAleatorio.push("Agua");
-        combate();
     } else {
         ataqueEnemigoAleatorio.push("Tierra");
+    }
+    iniciarPelea();
+}
+
+function iniciarPelea() {
+    if (ataqueJugador.length === 5) {
         combate();
     }
-
 }
+
 function crearMensaje(resultado) {
     let nuevoAtaqueJugador = document.createElement("p");
     let nuevoAtaqueEnemigo = document.createElement("p");
     sectionLog.innerHTML = resultado;
-    nuevoAtaqueJugador.innerHTML = ataqueJugador;
-    nuevoAtaqueEnemigo.innerHTML = ataqueEnemigoAleatorio;
+    nuevoAtaqueJugador.innerHTML = indexAtaqueJugador;
+    nuevoAtaqueEnemigo.innerHTML = indexAtaqueEnemigo;
     ataqueDelJugador.appendChild(nuevoAtaqueJugador);
     ataquesEnemigo.appendChild(nuevoAtaqueEnemigo);
 }
@@ -193,22 +199,32 @@ function finJuego(resultado) {
     btnTierra.disabled = true;
     btnReiniciar.style.display = "block";
 }
+
+function indexAmbosOponentes(jugador, enemigo){
+    indexAtaqueJugador = ataqueJugador[jugador];
+    indexAtaqueEnemigo = ataqueEnemigoAleatorio[enemigo];
+}
+
 function combate() {
-    if (ataqueJugador == ataqueEnemigoAleatorio) {
-        resultado = "Empate";
-        crearMensaje(resultado);
-    } else if (ataqueJugador == "Fuego" && ataqueEnemigoAleatorio == "Tierra" || ataqueJugador == "Agua" && ataqueEnemigoAleatorio == "Fuego" || ataqueJugador == "Tierra" && ataqueEnemigoAleatorio == "Agua") {
-        resultado = "¡Ganaste este combate 👑!";
-        crearMensaje(resultado);
-        perdidas--;
-        spanVidaEnemigo.innerHTML = perdidas;
-    } else {
-        resultado = "Perdiste:(";
-        crearMensaje(resultado);
-        triunfos--;
-        spanVidasJugador.innerHTML = triunfos;
+    for (let i = 0; i < ataqueJugador.length; i++) {
+        if (ataqueJugador[i] == ataqueEnemigoAleatorio[i]) {
+            indexAmbosOponentes(i,i);
+            resultado = "Empate";
+            crearMensaje(resultado);
+        }else if (ataqueJugador[i] == "Fuego" && ataqueEnemigoAleatorio[i] == "Tierra" || ataqueJugador[i] == "Agua" && ataqueEnemigoAleatorio[i] == "Fuego" || ataqueJugador[i] == "Tierra" && ataqueEnemigoAleatorio[i] == "Agua") {
+            indexAmbosOponentes(i,i);
+            resultado = "¡Ganaste este combate 👑!";
+            crearMensaje(resultado);
+            perdidas--;
+            spanVidaEnemigo.innerHTML = perdidas;
+        }else {
+            indexAmbosOponentes(i,i);
+            resultado = "Perdiste:(";
+            crearMensaje(resultado);
+            triunfos--;
+            spanVidasJugador.innerHTML = triunfos;
+        }
     }
-    revisarVidas();
 }
 function revisarVidas() {
     if (perdidas == 0) {
