@@ -1,24 +1,19 @@
 const seccionAtaque = document.getElementById("seleccionarAtaque");
 const btnMascotaJugador = document.getElementById("btnMascota");
-
 const btnReiniciar = document.getElementById("btnReiniciar");
-
 const seccionMascotas = document.getElementById("seleccionMascota");
-
 const spanMascotaJugador = document.getElementById("tuMascota");
-
 const spanMascotaEnemigo = document.getElementById("mascotaEnemigo");
-
 const spanVidasJugador = document.getElementById("vida-jugador");
 const spanVidaEnemigo = document.getElementById("vida-enemigo");
-
 const sectionLog = document.getElementById("resultado");
 const ataqueDelJugador = document.getElementById("ataqueDelJugador");
 const ataquesEnemigo = document.getElementById("ataquesEnemigo");
-
 const contenedorTarjetas = document.getElementById("contenedorTarjetas");
 const contenedorAtaques = document.getElementById("contenedorAtaques")
-
+const sectionVerMapa = document.getElementById("verMapa");
+const mapa = document.getElementById("mapa");
+let lienzo = mapa.getContext("2d");
 let mokepones = [];
 let ataqueJugador = [];
 let ataqueEnemigoAleatorio = [];
@@ -42,12 +37,18 @@ let indexAtaqueEnemigo;
 let indexAtaqueJugador;
 
 class Mokepon {
-    constructor(nombre, foto, vida, id) {
+    constructor(nombre, foto, vida, id,) {
         this.nombre = nombre;
         this.foto = foto;
         this.vida = vida;
         this.ataques = [];
         this.id = id;
+        this.x = 20;
+        this.y = 30;
+        this.alto = 80;
+        this.ancho = 80;
+        this.mapaFoto = new Image();
+        this.mapaFoto.src = foto;
     }
 }
 
@@ -86,7 +87,7 @@ langostelvis.ataques.push(
     { nombre: "🔥", id: "btnFuego" },
     { nombre: "💦", id: "btnAgua" },
     { nombre: "🌱", id: "btnTierra" },
-)
+);
 pydos.ataques.push(
     { nombre: "🌱", id: "btnTierra" },
     { nombre: "🌱", id: "btnTierra" },
@@ -106,7 +107,6 @@ tucapalma.ataques.push(
 mokepones.push(hipodoge, capipepo, ratigueya, langostelvis, pydos, tucapalma);
 
 function iniciarJuego() {
-    seccionAtaque.style.display = "none";
     mokepones.forEach((mokepon) => {
         opcionDeMokepones = `
         <input type="radio" value=${mokepon.nombre} name="mascota" id=${mokepon.id} />
@@ -121,17 +121,21 @@ function iniciarJuego() {
         inpLangostelvis = document.getElementById("btnLangostelvis");
         inpPydos = document.getElementById("btnPydos");
         inpTucapalma = document.getElementById("btnTucapalma");
+          
     });
-
+    seccionAtaque.style.display = "none";
     //DECLARACION BOTONES MASCOTAS
     btnMascotaJugador.addEventListener("click", seleccionMascotaJugador);
-
     btnReiniciar.addEventListener("click", reiniciar);
     /* btnReiniciar.style.display = "none"; */
+    sectionVerMapa.style.display = "none";
+    
 }
 function seleccionMascotaJugador() {
-    seccionAtaque.style.display = "flex";
+    /* seccionAtaque.style.display = "flex"; */
     seccionMascotas.style.display = "none";
+    sectionVerMapa.style.display ="flex";
+    
     if (inpHipodogue.checked) {
         mascotaJugador = inpHipodogue.value;
         spanMascotaJugador.innerHTML = inpHipodogue.value;
@@ -276,6 +280,24 @@ function revisarVidas() {
          finJuego("¡Perdiste este combate!");
     }
 }
+
+function pintarPersonaje(){
+    lienzo.clearRect(0,0, mapa.width, mapa.height);
+    lienzo.drawImage(
+        capipepo.mapaFoto, capipepo.x, capipepo.y, capipepo.ancho, capipepo.alto
+    );
+}
+
+function moverCapipepoX(){
+    capipepo.x += 5;
+    pintarPersonaje();
+}
+
+function moverCapipepoY(){
+    capipepo.y += 5;
+    pintarPersonaje();
+}
+
 function reiniciar() {
     location.reload();
 }
