@@ -1,0 +1,19 @@
+{
+  "name": "03-mokepon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RREYES0424/Mokepon.git"
+  },
+  "author": "Ricardo Reyes Flores",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RREYES0424/Mokepon/issues"
+  },
+  "homepage": "https://github.com/RREYES0424/Mokepon#readme"
+}
