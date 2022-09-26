@@ -15,9 +15,11 @@
   "bugs": {
     "url": "https://github.com/RREYES0424/Mokepon/issues"
   },
-  "homepage": "https://github.com/RREYES0424/Mokepon#readme",
+  "homepage": "https://rreyes0424.github.io/Mokepon",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "gh-pages": "^4.0.0"
   }
+  
 }
